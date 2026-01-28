@@ -6,20 +6,23 @@
 .no-questions {
     text-align: center;
     padding: 40px 20px;
-    color: #666;
+    color: #c084fc;
     font-style: italic;
+    font-family: 'Poppins', sans-serif;
 }
 
 .question-block {
-    background: white;
-    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px rgba(255, 107, 157, 0.15);
     margin-bottom: 20px;
+    border: 1px solid rgba(255, 107, 157, 0.2);
 }
 
 .question-content {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #ff6b9d 0%, #c084fc 100%);
     color: white;
     padding: 20px;
 }
@@ -27,13 +30,16 @@
 .question-content h4 {
     margin: 0 0 10px 0;
     font-size: 16px;
-    opacity: 0.9;
+    opacity: 0.95;
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
 }
 
 .question-text {
     margin: 0;
     font-size: 18px;
     line-height: 1.6;
+    font-family: 'Poppins', sans-serif;
 }
 
 .answer-section {
@@ -49,58 +55,65 @@
 .your-answer h5,
 .all-answers h5 {
     margin: 0 0 15px 0;
-    color: #333;
+    color: #ff6b9d;
     font-size: 16px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
 }
 
 .answer-form textarea {
     width: 100%;
     padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-family: inherit;
+    border: 2px solid #fce7f3;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
     font-size: 14px;
     resize: vertical;
     box-sizing: border-box;
     margin-bottom: 10px;
+    background: white;
+    transition: all 0.3s ease;
 }
 
 .answer-form textarea:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: #ff6b9d;
+    box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1);
 }
 
 .answer-form button {
     padding: 10px 20px;
-    background: #667eea;
+    background: linear-gradient(135deg, #ff6b9d 0%, #c084fc 100%);
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 14px;
-    transition: background 0.3s;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
 }
 
 .answer-form button:hover:not(:disabled) {
-    background: #5568d3;
-}
-
-.answer-form button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-.answer-item {
-    background: #f9f9f9;
+    transform: translateY(-2px);
+    box-shadow: rgba(252, 231, 243, 0.3);
     padding: 15px;
-    border-radius: 8px;
+    border-radius: 12px;
     margin-bottom: 15px;
-    border-left: 3px solid #e0e0e0;
+    border-left: 3px solid #fce7f3;
+    transition: all 0.3s ease;
+}
+
+.answer-item:hover {
+    background: rgba(252, 231, 243, 0.5);
+    border-left-color: #ff6b9d;
 }
 
 .your-answer-item {
-    background: #e8ecff;
-    border-left-color: #667eea;
+    background: linear-gradient(135deg, rgba(255, 107, 157, 0.1) 0%, rgba(192, 132, 252, 0.1) 100%);
+    border-left-color: #ff6b9d;
+    border-left-width: 4px;
 }
 
 .answer-header {
@@ -112,23 +125,36 @@
 
 .answer-author {
     font-weight: 600;
-    color: #667eea;
+    color: #ff6b9d;
+    font-family: 'Poppins', sans-serif;
 }
 
 .answer-date {
     font-size: 12px;
-    color: #999;
+    color: #c084fc;
+    font-family: 'Poppins', sans-serif;
 }
 
 .answer-text {
-    color: #333;
+    color: #4a5568;
     line-height: 1.6;
     margin: 0;
     white-space: pre-wrap;
+    font-family: 'Poppins', sans-serif;
 }
 
 .all-answers {
     margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid rgba(255, 107, 157, 0.2);
+}
+
+.no-answers {
+    text-align: center;
+    padding: 20px;
+    color: #c084fc;
+    font-style: italic;
+    font-family: 'Poppins', sans-serif;
     padding-top: 20px;
     border-top: 1px solid #e0e0e0;
 }
