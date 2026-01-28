@@ -2,7 +2,7 @@ FROM node:20-alpine AS build
 WORKDIR /app
 
 # Copy package files for layer caching
-COPY package*.json ./
+COPY package*.json package-lock.json ./
 RUN npm ci --legacy-peer-deps
 
 # Copy source and build
