@@ -106,9 +106,7 @@ function BookView() {
                 <>
                     <div className="book-hero">
                         <div className="book-cover-container">
-                            <a href="/book.pdf" target="_blank" rel="noopener noreferrer" style={{display: 'block'}}>
                                 <img src={bookCover} alt="Book Cover" className="book-cover" style={{cursor: 'pointer'}} />
-                            </a>
                             <div className="book-glow"></div>
                         </div>
                         <div className="book-details">
