@@ -3,7 +3,7 @@ WORKDIR /app
 
 # Copy package files for layer caching
 COPY package*.json ./
-RUN npm install --silent
+RUN npm ci --legacy-peer-deps
 
 # Copy source and build
 COPY . .
