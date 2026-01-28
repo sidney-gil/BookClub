@@ -85,4 +85,17 @@ public class UserController {
         userService.deleteUser(id);
         return ResponseEntity.ok().build();
     }
+    
+    @PutMapping("/{id}/progress")
+    public ResponseEntity<Map<String, Object>> updateProgress(@PathVariable Long id, @RequestBody Map<String, Integer> progressData) {
+        Integer currentChapter = progressData.get("currentChapter");
+        User user = userService.updateUserProgress(id, currentChapter);
+        
+        Map<String, Object> response = new HashMap<>();
+        response.put("id", user.getId());
+        response.put("username", user.getUsername());
+        response.put("currentChapter", user.getCurrentChapter());
+        
+        return ResponseEntity.ok(response);
+    }
 }

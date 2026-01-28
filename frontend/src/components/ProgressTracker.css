@@ -1,184 +1,160 @@
 .progress-tracker {
-    padding: 20px;
-}
-
-.progress-tracker h2 {
-    margin: 0 0 20px 0;
-    color: #333;
-}
-
-.my-progress,
-.all-progress {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
-
-.my-progress h3,
-.all-progress h3 {
-    margin: 0 0 15px 0;
-    color: #667eea;
-    font-size: 18px;
-}
-
-.progress-details {
-    margin-bottom: 20px;
-}
-
-.progress-info {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-.chapter-label {
-    color: #666;
-    font-size: 16px;
-}
-
-.chapter-value {
-    font-size: 32px;
-    font-weight: bold;
-    color: #667eea;
-}
-
-.total-chapters {
-    color: #999;
-    font-size: 16px;
-}
-
-.progress-bar-container {
-    position: relative;
-    width: 100%;
-    height: 30px;
-    background: #f0f0f0;
-    border-radius: 15px;
+    margin: 30px 0;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
     overflow: hidden;
+    box-shadow: 0 8px 32px rgba(255, 182, 193, 0.2);
+    border: 2px solid rgba(255, 182, 193, 0.3);
 }
 
-.progress-bar {
-    height: 100%;
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-    transition: width 0.5s ease;
-    border-radius: 15px;
-}
-
-.progress-percentage {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #333;
-    font-weight: bold;
-    font-size: 14px;
-}
-
-.update-form {
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid #e0e0e0;
-}
-
-.update-form label {
-    display: block;
-    margin-bottom: 10px;
-    color: #666;
-    font-weight: 500;
-}
-
-.form-row {
-    display: flex;
-    gap: 10px;
-}
-
-.update-form input {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-.update-form input:focus {
-    outline: none;
-    border-color: #667eea;
-}
-
-.update-form button {
-    padding: 10px 30px;
-    background: #667eea;
-    color: white;
+.progress-tracker-toggle {
+    width: 100%;
+    padding: 20px 30px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 220, 235, 0.95) 100%);
     border: none;
-    border-radius: 5px;
     cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.progress-tracker-toggle:hover {
+    background: linear-gradient(135deg, rgba(255, 220, 235, 0.95) 0%, rgba(255, 182, 193, 0.95) 100%);
+}
+
+.toggle-text {
+    font-size: 20px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #ff6b9d 0%, #c084fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-family: 'Playfair Display', serif;
+}
+
+.toggle-arrow {
     font-size: 16px;
-    transition: background 0.3s;
+    color: #ff6b9d;
+    transition: transform 0.3s ease;
 }
 
-.update-form button:hover:not(:disabled) {
-    background: #5568d3;
+.toggle-arrow.expanded {
+    transform: rotate(180deg);
 }
 
-.update-form button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+.progress-tracker-content {
+    padding: 25px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 245, 250, 0.5) 100%);
+}
+
+.loading-users,
+.no-users {
+    text-align: center;
+    padding: 30px;
+    color: #9ca3af;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
 }
 
 .users-list {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 15px;
 }
 
-.no-users {
-    text-align: center;
-    color: #999;
+.user-progress-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
     padding: 20px;
+    border: 2px solid rgba(255, 182, 193, 0.2);
+    transition: all 0.3s ease;
 }
 
-.user-progress-item {
-    padding: 15px;
-    background: #f9f9f9;
-    border-radius: 8px;
-    border-left: 4px solid #667eea;
+.user-progress-card:hover {
+    border-color: rgba(255, 107, 157, 0.5);
+    transform: translateX(5px);
+    box-shadow: 0 4px 15px rgba(255, 107, 157, 0.2);
 }
 
-.user-info {
+.user-progress-card.current-user {
+    background: linear-gradient(135deg, rgba(255, 107, 157, 0.1), rgba(192, 132, 252, 0.1));
+    border: 2px solid rgba(192, 132, 252, 0.5);
+}
+
+.user-progress-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    gap: 15px;
+    margin-bottom: 12px;
+}
+
+.user-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff6b9d 0%, #c084fc 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 700;
+    flex-shrink: 0;
+    box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+}
+
+.user-details {
+    flex: 1;
 }
 
 .user-name {
+    font-size: 18px;
     font-weight: 600;
-    color: #333;
+    color: #374151;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .you-badge {
-    margin-left: 8px;
     font-size: 12px;
-    color: #667eea;
-    font-weight: normal;
+    padding: 3px 10px;
+    background: linear-gradient(135deg, #ff6b9d 0%, #c084fc 100%);
+    color: white;
+    border-radius: 12px;
+    font-weight: 500;
 }
 
 .user-chapter {
-    color: #666;
     font-size: 14px;
+    color: #6b7280;
 }
 
-.mini-progress-bar {
+.progress-status {
+    font-size: 13px;
+    padding: 6px 14px;
+    border-radius: 12px;
+    font-weight: 500;
+    background: rgba(192, 132, 252, 0.15);
+    color: #7c3aed;
+}
+
+.user-progress-bar {
+    width: 100%;
     height: 8px;
-    background: #e0e0e0;
-    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
     overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.mini-progress-fill {
+.user-progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(90deg, #ff6b9d 0%, #c084fc 100%);
+    border-radius: 10px;
     transition: width 0.5s ease;
+    box-shadow: 0 2px 6px rgba(255, 107, 157, 0.3);
 }

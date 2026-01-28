@@ -4,7 +4,7 @@ import ChapterComments from './ChapterComments';
 import WeeklyQuestion from './WeeklyQuestion';
 import './WeekDropdown.css';
 
-function WeekDropdown({ week, isExpanded, onToggle }) {
+function WeekDropdown({ week, isExpanded, onToggle, currentChapter, onProgressUpdate }) {
     const [chapters, setChapters] = useState([]);
     const [selectedChapter, setSelectedChapter] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -41,6 +41,17 @@ function WeekDropdown({ week, isExpanded, onToggle }) {
             setSelectedChapter(chapter);
             setShowQuestions(false);
         }
+    };
+
+    const markChapterComplete = (chapterNumber, e) => {
+        e.stopPropagation();
+        if (onProgressUpdate) {
+            onProgressUpdate(chapterNumber);
+        }
+    };
+
+    const isChapterComplete = (chapterNumber) => {
+        return currentChapter >= chapterNumber;
     };
 
     return (
@@ -82,15 +93,31 @@ function WeekDropdown({ week, isExpanded, onToggle }) {
                                     {chapters.map(chapter => (
                                         <div key={chapter.id} className="chapter-item">
                                             <div
-                                                className={`chapter-header ${selectedChapter?.id === chapter.id ? 'active' : ''}`}
+                                                className={`chapter-header ${selectedChapter?.id === chapter.id ? 'active' : ''} ${isChapterComplete(chapter.chapterNumber) ? 'completed' : ''}`}
                                                 onClick={() => handleChapterClick(chapter)}
                                             >
-                                                <span className="chapter-title">
-                                                    Chapter {chapter.chapterNumber}: {chapter.title || 'Untitled'}
-                                                </span>
-                                                <span className="chapter-arrow">
-                                                    {selectedChapter?.id === chapter.id ? '▲' : '▼'}
-                                                </span>
+                                                <div className="chapter-title-wrapper">
+                                                    <button
+                                                        className={`chapter-checkbox ${isChapterComplete(chapter.chapterNumber) ? 'checked' : ''}`}
+                                                        onClick={(e) => markChapterComplete(chapter.chapterNumber, e)}
+                                                        title={isChapterComplete(chapter.chapterNumber) ? 'Mark as unread' : 'Mark as complete'}
+                                                    >
+                                                        {isChapterComplete(chapter.chapterNumber) ? '✓' : ''}
+                                                    </button>
+                                                    <span className="chapter-title">
+                                                        Chapter {chapter.chapterNumber}{chapter.title ? `: ${chapter.title}` : ''}
+                                                    </span>
+                                                </div>
+                                                <div className="chapter-meta">
+                                                    {chapter.comments && chapter.comments.length > 0 && (
+                                                        <span className="comment-count">
+                                                            💬 {chapter.comments.length}
+                                                        </span>
+                                                    )}
+                                                    <span className="chapter-arrow">
+                                                        {selectedChapter?.id === chapter.id ? '▲' : '▼'}
+                                                    </span>
+                                                </div>
                                             </div>
                                             {selectedChapter?.id === chapter.id && (
                                                 <ChapterComments chapter={chapter} />

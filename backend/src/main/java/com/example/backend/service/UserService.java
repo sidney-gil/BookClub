@@ -62,4 +62,10 @@ public class UserService {
         User user = getUserById(id);
         userRepository.delete(user);
     }
+    
+    public User updateUserProgress(Long id, Integer currentChapter) {
+        User user = getUserById(id);
+        user.setCurrentChapter(currentChapter);
+        return userRepository.save(user);
+    }
 }

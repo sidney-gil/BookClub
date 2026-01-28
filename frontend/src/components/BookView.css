@@ -178,10 +178,44 @@
     padding: 12px 24px;
     background: linear-gradient(135deg, rgba(255, 107, 157, 0.1), rgba(192, 132, 252, 0.1));
     border-radius: 20px;
-    border: 2px solid rgba(255, 182, 193, 0.3);
+    font-size: 16px;
     font-weight: 500;
     color: #6b7280;
-    font-size: 15px;
+    border: 2px solid rgba(255, 182, 193, 0.3);
+    transition: all 0.3s ease;
+}
+
+.progress-indicator {
+    margin-top: 30px;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 220, 235, 0.8));
+    border-radius: 15px;
+    border: 2px solid rgba(255, 182, 193, 0.3);
+}
+
+.progress-text {
+    font-size: 18px;
+    font-weight: 600;
+    color: #6b7280;
+    margin-bottom: 15px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff6b9d 0%, #c084fc 100%);
+    border-radius: 10px;
+    transition: width 0.5s ease;
+    box-shadow: 0 2px 8px rgba(255, 107, 157, 0.4);
 }
 
 .weeks-container {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import api from '../services/api';
 import WeekDropdown from './WeekDropdown';
+import ProgressTracker from './ProgressTracker';
 import './BookView.css';
 import bookCover from '../assets/BookImage.jpg';
 
@@ -48,6 +49,22 @@ function BookView() {
         setExpandedWeek(expandedWeek === weekId ? null : weekId);
     };
 
+    const updateProgress = async (chapterNumber) => {
+        if (!user) return;
+        
+        try {
+            const response = await api.put(`/users/${user.id}/progress`, {
+                currentChapter: chapterNumber
+            });
+            
+            const updatedUser = { ...user, currentChapter: response.data.currentChapter };
+            setUser(updatedUser);
+            localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+        } catch (err) {
+            console.error('Error updating progress:', err);
+        }
+    };
+
     const handleLogout = () => {
         localStorage.clear();
         window.location.href = '/login';
@@ -82,7 +99,9 @@ function BookView() {
                 <>
                     <div className="book-hero">
                         <div className="book-cover-container">
-                            <img src={bookCover} alt="Book Cover" className="book-cover" />
+                            <a href="/book.pdf" target="_blank" rel="noopener noreferrer" style={{display: 'block'}}>
+                                <img src={bookCover} alt="Book Cover" className="book-cover" style={{cursor: 'pointer'}} />
+                            </a>
                             <div className="book-glow"></div>
                         </div>
                         <div className="book-details">
@@ -92,9 +111,26 @@ function BookView() {
                                 <span className="stat">☰ {book?.totalChapters} Chapters</span>
                                 <span className="stat">✓ Active Reading</span>
                             </div>
+                            {user && (
+                                <div className="progress-indicator">
+                                    <div className="progress-text">
+                                        Reading Chapter {user.currentChapter || 1} of {book?.totalChapters}
+                                    </div>
+                                    <div className="progress-bar">
+                                        <div 
+                                            className="progress-fill" 
+                                            style={{width: `${((user.currentChapter || 0) / (book?.totalChapters || 1)) * 100}%`}}
+                                        ></div>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
                     <div className="weeks-container">
+                        <ProgressTracker 
+                            totalChapters={book?.totalChapters}
+                            currentUserId={user?.id}
+                        />
                         <h2 className="section-title">Reading Schedule</h2>
                         {!weeks || weeks.length === 0 ? (
                             <div className="no-weeks">
@@ -107,6 +143,8 @@ function BookView() {
                                     week={week}
                                     isExpanded={expandedWeek === week.id}
                                     onToggle={() => toggleWeek(week.id)}
+                                    currentChapter={user?.currentChapter || 0}
+                                    onProgressUpdate={updateProgress}
                                 />
                             ))
                         )}
