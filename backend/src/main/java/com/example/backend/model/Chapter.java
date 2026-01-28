@@ -3,6 +3,9 @@ package com.example.backend.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,11 +31,13 @@ public class Chapter {
     
     @ManyToOne
     @JoinColumn(name = "week_id")
+    @JsonBackReference("week-chapters")
     private Week week;
     
     private Integer chapterNumber;
     private String title;
     
     @OneToMany(mappedBy = "chapter", cascade = CascadeType.ALL)
+    @JsonManagedReference("chapter-comments")
     private List<Comment> comments = new ArrayList<>();
 }

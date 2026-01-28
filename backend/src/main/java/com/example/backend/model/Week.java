@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,6 +33,7 @@ public class Week {
     
     @ManyToOne
     @JoinColumn(name = "book_id")
+    @JsonBackReference("book-weeks")
     private Book book;
     
     private Integer weekNumber;
@@ -38,5 +42,6 @@ public class Week {
     private LocalDate endDate;
     
     @OneToMany(mappedBy = "week", cascade = CascadeType.ALL)
+    @JsonManagedReference("week-chapters")
     private List<Chapter> chapters = new ArrayList<>();
 }

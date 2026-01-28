@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import api from '../services/api';
 import WeekDropdown from './WeekDropdown';
 import './BookView.css';
+import bookCover from '../assets/BookImage.jpg';
 
 function BookView() {
     const [book, setBook] = useState(null);
@@ -62,10 +63,12 @@ function BookView() {
 
     return (
         <div className="book-view">
-            <div className="header">
-                <div className="user-info">
-                    <span>Welcome, {user?.username}!</span>
-                    <button onClick={handleLogout} className="logout-btn">Logout</button>
+            <div className="magical-header">
+                <div className="header-content">
+                    <div className="user-info">
+                        <span className="welcome-text">✨ Welcome, {user?.username}! ✨</span>
+                        <button onClick={handleLogout} className="logout-btn">Logout</button>
+                    </div>
                 </div>
             </div>
             
@@ -77,11 +80,26 @@ function BookView() {
                 </div>
             ) : (
                 <>
-                    <h1>{book?.title}</h1>
-                    <p className="book-author">by {book?.author}</p>
+                    <div className="book-hero">
+                        <div className="book-cover-container">
+                            <img src={bookCover} alt="Book Cover" className="book-cover" />
+                            <div className="book-glow"></div>
+                        </div>
+                        <div className="book-details">
+                            <h1 className="book-title">{book?.title}</h1>
+                            <p className="book-author">by {book?.author}</p>
+                            <div className="book-stats">
+                                <span className="stat">☰ {book?.totalChapters} Chapters</span>
+                                <span className="stat">✓ Active Reading</span>
+                            </div>
+                        </div>
+                    </div>
                     <div className="weeks-container">
+                        <h2 className="section-title">Reading Schedule</h2>
                         {!weeks || weeks.length === 0 ? (
-                            <p>No weeks scheduled yet for this book.</p>
+                            <div className="no-weeks">
+                                <p>✨ No weeks scheduled yet for this book ✨</p>
+                            </div>
                         ) : (
                             weeks.map(week => (
                                 <WeekDropdown 
