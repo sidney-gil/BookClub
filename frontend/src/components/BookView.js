@@ -70,6 +70,10 @@ function BookView() {
         window.location.href = '/login';
     };
 
+    const handleSettings = () => {
+        window.location.href = '/settings';
+    };
+
     if (loading) {
         return (
             <div className="book-view">
@@ -84,7 +88,10 @@ function BookView() {
                 <div className="header-content">
                     <div className="user-info">
                         <span className="welcome-text">✨ Welcome, {user?.username}! ✨</span>
-                        <button onClick={handleLogout} className="logout-btn">Logout</button>
+                        <div className="header-buttons">
+                            <button onClick={handleSettings} className="settings-btn">Settings</button>
+                            <button onClick={handleLogout} className="logout-btn">Logout</button>
+                        </div>
                     </div>
                 </div>
             </div>

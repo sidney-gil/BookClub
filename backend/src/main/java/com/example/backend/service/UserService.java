@@ -68,4 +68,29 @@ public class UserService {
         user.setCurrentChapter(currentChapter);
         return userRepository.save(user);
     }
+    
+    public User updateUsername(Long id, String newUsername) {
+        User user = getUserById(id);
+        
+        // Check if username already exists
+        if (userRepository.existsByUsername(newUsername) && !user.getUsername().equals(newUsername)) {
+            throw new RuntimeException("Username already exists");
+        }
+        
+        user.setUsername(newUsername);
+        return userRepository.save(user);
+    }
+    
+    public void updatePassword(Long id, String currentPassword, String newPassword) {
+        User user = getUserById(id);
+        
+        // Verify current password
+        if (!passwordEncoder.matches(currentPassword, user.getPassword())) {
+            throw new RuntimeException("Current password is incorrect");
+        }
+        
+        // Hash and save new password
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
+    }
 }
