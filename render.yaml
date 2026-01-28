@@ -1,0 +1,33 @@
+services:
+  - type: web
+    name: bookclub-frontend
+    env: docker
+    dockerfilePath: ./frontend/Dockerfile
+    dockerContext: ./frontend
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://bookclub-backend.onrender.com/api
+
+  - type: web
+    name: bookclub-backend
+    env: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: bookclub-db
+          property: connectionString
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: bookclub-db
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: bookclub-db
+          property: password
+
+databases:
+  - name: bookclub-db
+    databaseName: bookclub
+    user: bookclub
