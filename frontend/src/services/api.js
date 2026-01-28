@@ -37,7 +37,7 @@ export const bookAPI = {
 };
 
 export const weekAPI = {
-    getChapters: (weekId) => api.get(`/weeks/${weekId}/chapters`),
+    getChapters: (weekId) => api.get(`/chapters/week/${weekId}`),
     getWeeksByBook: (bookId) => api.get(`/weeks/book/${bookId}`),
     createWeek: (week) => api.post('/weeks', week),
 };
@@ -65,9 +65,11 @@ export const userAPI = {
 
 export const questionAPI = {
     getByWeek: (weekId) => api.get(`/questions/week/${weekId}`),
+    getAnswers: (questionId) => api.get(`/answers/question/${questionId}`),
     create: (question) => api.post('/questions', question),
-    getAnswers: (questionId) => api.get(`/questions/${questionId}/answers`),
-    submitAnswer: (answer) => api.post('/questions/answers', answer),
+    submitAnswer: (answer) => api.post('/answers', answer),
+    update: (id, questionText) => api.put(`/questions/${id}`, questionText),
+    delete: (id) => api.delete(`/questions/${id}`),
 };
 
 export default api;

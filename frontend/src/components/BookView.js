@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import api from '../services/api';
 import WeekDropdown from './WeekDropdown';
+import './BookView.css';
 
 function BookView() {
     const [book, setBook] = useState(null);
@@ -35,9 +36,10 @@ function BookView() {
     const fetchWeeks = async (bookId) => {
         try {
             const response = await api.get(`/books/${bookId}/weeks`);
-            setWeeks(response.data);
+            setWeeks(Array.isArray(response.data) ? response.data : []);
         } catch (err) {
             console.error('Error fetching weeks:', err);
+            setWeeks([]);
         }
     };
 
@@ -78,7 +80,7 @@ function BookView() {
                     <h1>{book?.title}</h1>
                     <p className="book-author">by {book?.author}</p>
                     <div className="weeks-container">
-                        {weeks.length === 0 ? (
+                        {!weeks || weeks.length === 0 ? (
                             <p>No weeks scheduled yet for this book.</p>
                         ) : (
                             weeks.map(week => (
