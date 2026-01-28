@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { userAPI } from '../services/api';
+import { authAPI } from '../services/api';
 import './Login.css';
 
 function Login() {
@@ -18,20 +18,16 @@ function Login() {
         setLoading(true);
 
         try {
-            // Try to fetch user by username
-            const response = await userAPI.getByUsername(username);
+            const response = await authAPI.login(username, password);
             
             if (response.data) {
-                // Store credentials for basic auth
-                localStorage.setItem('username', username);
-                localStorage.setItem('password', password);
                 localStorage.setItem('userId', response.data.id);
                 localStorage.setItem('currentUser', JSON.stringify(response.data));
                 
                 navigate('/');
             }
         } catch (err) {
-            setError('Invalid username or password');
+            setError(err.response?.data?.message || 'Invalid username or password');
         } finally {
             setLoading(false);
         }
@@ -50,12 +46,10 @@ function Login() {
                 currentChapter: 0
             };
 
-            const response = await userAPI.create(newUser);
+            const response = await authAPI.register(newUser);
             
             if (response.data) {
                 // Auto login after registration
-                localStorage.setItem('username', username);
-                localStorage.setItem('password', password);
                 localStorage.setItem('userId', response.data.id);
                 localStorage.setItem('currentUser', JSON.stringify(response.data));
                 

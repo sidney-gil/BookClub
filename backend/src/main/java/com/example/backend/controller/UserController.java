@@ -1,6 +1,8 @@
 package com.example.backend.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,33 @@ import com.example.backend.service.UserService;
 public class UserController {
     @Autowired
     private UserService userService;
+    
+    @PostMapping("/register")
+    public ResponseEntity<Map<String, Object>> registerUser(@RequestBody User user) {
+        User createdUser = userService.createUser(user);
+        Map<String, Object> response = new HashMap<>();
+        response.put("id", createdUser.getId());
+        response.put("username", createdUser.getUsername());
+        response.put("email", createdUser.getEmail());
+        response.put("currentChapter", createdUser.getCurrentChapter());
+        return ResponseEntity.ok(response);
+    }
+    
+    @PostMapping("/login")
+    public ResponseEntity<Map<String, Object>> login(@RequestBody Map<String, String> credentials) {
+        String username = credentials.get("username");
+        String password = credentials.get("password");
+        
+        User user = userService.authenticate(username, password);
+        
+        Map<String, Object> response = new HashMap<>();
+        response.put("id", user.getId());
+        response.put("username", user.getUsername());
+        response.put("email", user.getEmail());
+        response.put("currentChapter", user.getCurrentChapter());
+        
+        return ResponseEntity.ok(response);
+    }
     
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user) {

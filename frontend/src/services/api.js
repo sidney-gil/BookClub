@@ -49,6 +49,11 @@ export const commentAPI = {
     delete: (id) => api.delete(`/comments/${id}`),
 };
 
+export const authAPI = {
+    login: (username, password) => api.post('/users/login', { username, password }),
+    register: (user) => api.post('/users/register', user),
+};
+
 export const userAPI = {
     getAllUsers: () => api.get('/users'),
     getById: (id) => api.get(`/users/${id}`),
