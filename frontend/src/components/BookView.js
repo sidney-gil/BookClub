@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '../services/api';
+import WeekDropdown from './WeekDropdown';
 
 function BookView() {
     const [book, setBook] = useState(null);
