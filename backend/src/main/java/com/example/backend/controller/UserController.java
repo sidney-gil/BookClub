@@ -98,4 +98,30 @@ public class UserController {
         
         return ResponseEntity.ok(response);
     }
+    
+    @PutMapping("/{id}/username")
+    public ResponseEntity<Map<String, Object>> updateUsername(@PathVariable Long id, @RequestBody Map<String, String> data) {
+        String newUsername = data.get("username");
+        User user = userService.updateUsername(id, newUsername);
+        
+        Map<String, Object> response = new HashMap<>();
+        response.put("id", user.getId());
+        response.put("username", user.getUsername());
+        response.put("email", user.getEmail());
+        response.put("currentChapter", user.getCurrentChapter());
+        
+        return ResponseEntity.ok(response);
+    }
+    
+    @PutMapping("/{id}/password")
+    public ResponseEntity<Map<String, String>> updatePassword(@PathVariable Long id, @RequestBody Map<String, String> data) {
+        String currentPassword = data.get("currentPassword");
+        String newPassword = data.get("newPassword");
+        userService.updatePassword(id, currentPassword, newPassword);
+        
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Password updated successfully");
+        
+        return ResponseEntity.ok(response);
+    }
 }
