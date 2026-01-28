@@ -3,6 +3,7 @@ import { weekAPI } from '../services/api';
 import ChapterComments from './ChapterComments';
 import WeeklyQuestion from './WeeklyQuestion';
 import './WeekDropdown.css';
+import { BsChatSquareHeart } from "react-icons/bs";
 
 function WeekDropdown({ week, isExpanded, onToggle, currentChapter, onProgressUpdate }) {
     const [chapters, setChapters] = useState([]);
@@ -111,7 +112,7 @@ function WeekDropdown({ week, isExpanded, onToggle, currentChapter, onProgressUp
                                                 <div className="chapter-meta">
                                                     {chapter.comments && chapter.comments.length > 0 && (
                                                         <span className="comment-count">
-                                                            💬 {chapter.comments.length}
+                                                            <BsChatSquareHeart /> {chapter.comments.length}
                                                         </span>
                                                     )}
                                                     <span className="chapter-arrow">

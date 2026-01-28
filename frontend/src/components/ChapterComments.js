@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { commentAPI } from '../services/api';
 import './ChapterComments.css';
+import { BsFeather } from "react-icons/bs";
 
 function ChapterComments({ chapter }) {
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState('');
     const [loading, setLoading] = useState(false);
     const [submitting, setSubmitting] = useState(false);
+    const [editingId, setEditingId] = useState(null);
+    const [editContent, setEditContent] = useState('');
 
     useEffect(() => {
         fetchComments();
@@ -62,6 +65,32 @@ function ChapterComments({ chapter }) {
         }
     };
 
+    const startEdit = (comment) => {
+        setEditingId(comment.id);
+        setEditContent(comment.content);
+    };
+
+    const cancelEdit = () => {
+        setEditingId(null);
+        setEditContent('');
+    };
+
+    const handleUpdate = async (commentId) => {
+        if (!editContent.trim()) return;
+
+        try {
+            const response = await commentAPI.update(commentId, editContent);
+            setComments(comments.map(c => 
+                c.id === commentId ? { ...c, content: editContent, updatedAt: new Date().toISOString() } : c
+            ));
+            setEditingId(null);
+            setEditContent('');
+        } catch (err) {
+            console.error('Failed to update comment:', err);
+            alert('Failed to update comment. Please try again.');
+        }
+    };
+
     const formatDate = (dateString) => {
         if (!dateString) return '';
         const date = new Date(dateString);
@@ -112,19 +141,57 @@ function ChapterComments({ chapter }) {
                                 <div className="comment-meta">
                                     <span className="comment-date">
                                         {formatDate(comment.createdAt)}
+                                        {comment.updatedAt && comment.updatedAt !== comment.createdAt && (
+                                            <span className="edited-badge"> (edited)</span>
+                                        )}
                                     </span>
                                     {comment.user?.id === currentUserId && (
-                                        <button
-                                            onClick={() => handleDelete(comment.id)}
-                                            className="delete-btn"
-                                            title="Delete comment"
-                                        >
-                                            ×
-                                        </button>
+                                        <>
+                                            {editingId !== comment.id && (
+                                                <button
+                                                    onClick={() => startEdit(comment)}
+                                                    className="edit-btn"
+                                                    title="Edit comment"
+                                                >
+                                                    <BsFeather />
+                                                </button>
+                                            )}
+                                            <button
+                                                onClick={() => handleDelete(comment.id)}
+                                                className="delete-btn"
+                                                title="Delete comment"
+                                            >
+                                                ×
+                                            </button>
+                                        </>
                                     )}
                                 </div>
                             </div>
-                            <p className="comment-content">{comment.content}</p>
+                            {editingId === comment.id ? (
+                                <div className="edit-form">
+                                    <textarea
+                                        value={editContent}
+                                        onChange={(e) => setEditContent(e.target.value)}
+                                        rows="4"
+                                    />
+                                    <div className="edit-actions">
+                                        <button 
+                                            onClick={() => handleUpdate(comment.id)}
+                                            className="save-btn"
+                                        >
+                                            Save
+                                        </button>
+                                        <button 
+                                            onClick={cancelEdit}
+                                            className="cancel-btn"
+                                        >
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </div>
+                            ) : (
+                                <p className="comment-content">{comment.content}</p>
+                            )}
                         </div>
                     ))
                 )}
