@@ -1,0 +1,122 @@
+.week-dropdown {
+    background: white;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s;
+}
+
+.week-dropdown:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.week-header {
+    padding: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    transition: opacity 0.3s;
+}
+
+.week-header:hover {
+    opacity: 0.9;
+}
+
+.week-info h3 {
+    margin: 0 0 5px 0;
+    font-size: 20px;
+}
+
+.week-dates {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.arrow {
+    font-size: 18px;
+    transition: transform 0.3s;
+}
+
+.arrow.expanded {
+    transform: rotate(180deg);
+}
+
+.week-content {
+    padding: 20px;
+}
+
+.week-actions {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.action-btn {
+    padding: 10px 20px;
+    background: #f0f0f0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 14px;
+}
+
+.action-btn:hover {
+    background: #e0e0e0;
+}
+
+.action-btn.active {
+    background: #667eea;
+    color: white;
+}
+
+.loading-chapters,
+.no-chapters {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+.chapters-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.chapter-item {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.chapter-header {
+    padding: 15px;
+    background: #f9f9f9;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+}
+
+.chapter-header:hover {
+    background: #f0f0f0;
+}
+
+.chapter-header.active {
+    background: #e8ecff;
+    color: #667eea;
+    font-weight: 500;
+}
+
+.chapter-title {
+    font-size: 16px;
+}
+
+.chapter-arrow {
+    font-size: 14px;
+}

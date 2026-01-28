@@ -1,0 +1,146 @@
+.weekly-questions {
+    padding: 20px;
+}
+
+.loading-questions,
+.no-questions {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+    font-style: italic;
+}
+
+.question-block {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.question-content {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+}
+
+.question-content h4 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+.question-text {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.answer-section {
+    padding: 20px;
+}
+
+.answer-form,
+.your-answer {
+    margin-bottom: 30px;
+}
+
+.answer-form h5,
+.your-answer h5,
+.all-answers h5 {
+    margin: 0 0 15px 0;
+    color: #333;
+    font-size: 16px;
+}
+
+.answer-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 14px;
+    resize: vertical;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.answer-form textarea:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.answer-form button {
+    padding: 10px 20px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.answer-form button:hover:not(:disabled) {
+    background: #5568d3;
+}
+
+.answer-form button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.answer-item {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border-left: 3px solid #e0e0e0;
+}
+
+.your-answer-item {
+    background: #e8ecff;
+    border-left-color: #667eea;
+}
+
+.answer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.answer-author {
+    font-weight: 600;
+    color: #667eea;
+}
+
+.answer-date {
+    font-size: 12px;
+    color: #999;
+}
+
+.answer-text {
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    white-space: pre-wrap;
+}
+
+.all-answers {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.no-answers {
+    text-align: center;
+    padding: 20px;
+    color: #999;
+    font-style: italic;
+}
+
+.answers-list {
+    display: flex;
+    flex-direction: column;
+}

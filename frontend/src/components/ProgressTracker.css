@@ -1,0 +1,184 @@
+.progress-tracker {
+    padding: 20px;
+}
+
+.progress-tracker h2 {
+    margin: 0 0 20px 0;
+    color: #333;
+}
+
+.my-progress,
+.all-progress {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.my-progress h3,
+.all-progress h3 {
+    margin: 0 0 15px 0;
+    color: #667eea;
+    font-size: 18px;
+}
+
+.progress-details {
+    margin-bottom: 20px;
+}
+
+.progress-info {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.chapter-label {
+    color: #666;
+    font-size: 16px;
+}
+
+.chapter-value {
+    font-size: 32px;
+    font-weight: bold;
+    color: #667eea;
+}
+
+.total-chapters {
+    color: #999;
+    font-size: 16px;
+}
+
+.progress-bar-container {
+    position: relative;
+    width: 100%;
+    height: 30px;
+    background: #f0f0f0;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    transition: width 0.5s ease;
+    border-radius: 15px;
+}
+
+.progress-percentage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #333;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.update-form {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.update-form label {
+    display: block;
+    margin-bottom: 10px;
+    color: #666;
+    font-weight: 500;
+}
+
+.form-row {
+    display: flex;
+    gap: 10px;
+}
+
+.update-form input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.update-form input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.update-form button {
+    padding: 10px 30px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.update-form button:hover:not(:disabled) {
+    background: #5568d3;
+}
+
+.update-form button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.users-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.no-users {
+    text-align: center;
+    color: #999;
+    padding: 20px;
+}
+
+.user-progress-item {
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+}
+
+.user-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.user-name {
+    font-weight: 600;
+    color: #333;
+}
+
+.you-badge {
+    margin-left: 8px;
+    font-size: 12px;
+    color: #667eea;
+    font-weight: normal;
+}
+
+.user-chapter {
+    color: #666;
+    font-size: 14px;
+}
+
+.mini-progress-bar {
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.mini-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    transition: width 0.5s ease;
+}
